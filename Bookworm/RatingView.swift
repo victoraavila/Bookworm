@@ -31,7 +31,6 @@ struct RatingView: View {
             
             ForEach(1 ..< maximumRating + 1, id: \.self) { number in
                 Button {
-                    print("Tapped \(number)")
                     rating = number
                 } label: {
                     image(for: number)

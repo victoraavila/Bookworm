@@ -14,6 +14,7 @@
 		96F9D1392C090FEE005E3BD7 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1382C090FEE005E3BD7 /* Book.swift */; };
 		96F9D13B2C0910C2005E3BD7 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D13A2C0910C2005E3BD7 /* AddBookView.swift */; };
 		96F9D13D2C092202005E3BD7 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D13C2C092202005E3BD7 /* RatingView.swift */; };
+		96F9D13F2C092BA5005E3BD7 /* EmojiRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D13E2C092BA5005E3BD7 /* EmojiRatingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		96F9D1382C090FEE005E3BD7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		96F9D13A2C0910C2005E3BD7 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		96F9D13C2C092202005E3BD7 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		96F9D13E2C092BA5005E3BD7 /* EmojiRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiRatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				96F9D12A2C090DBE005E3BD7 /* BookwormApp.swift */,
 				96F9D12C2C090DBE005E3BD7 /* ContentView.swift */,
+				96F9D13E2C092BA5005E3BD7 /* EmojiRatingView.swift */,
 				96F9D13C2C092202005E3BD7 /* RatingView.swift */,
 				96F9D13A2C0910C2005E3BD7 /* AddBookView.swift */,
 				96F9D1382C090FEE005E3BD7 /* Book.swift */,
@@ -150,6 +153,7 @@
 				96F9D12B2C090DBE005E3BD7 /* BookwormApp.swift in Sources */,
 				96F9D1392C090FEE005E3BD7 /* Book.swift in Sources */,
 				96F9D13D2C092202005E3BD7 /* RatingView.swift in Sources */,
+				96F9D13F2C092BA5005E3BD7 /* EmojiRatingView.swift in Sources */,
 				96F9D13B2C0910C2005E3BD7 /* AddBookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
