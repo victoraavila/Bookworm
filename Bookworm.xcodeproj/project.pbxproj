@@ -11,6 +11,8 @@
 		96F9D12D2C090DBE005E3BD7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D12C2C090DBE005E3BD7 /* ContentView.swift */; };
 		96F9D12F2C090DC3005E3BD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96F9D12E2C090DC3005E3BD7 /* Assets.xcassets */; };
 		96F9D1322C090DC3005E3BD7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96F9D1312C090DC3005E3BD7 /* Preview Assets.xcassets */; };
+		96F9D1392C090FEE005E3BD7 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1382C090FEE005E3BD7 /* Book.swift */; };
+		96F9D13B2C0910C2005E3BD7 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D13A2C0910C2005E3BD7 /* AddBookView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		96F9D12C2C090DBE005E3BD7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		96F9D12E2C090DC3005E3BD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96F9D1312C090DC3005E3BD7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		96F9D1382C090FEE005E3BD7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		96F9D13A2C0910C2005E3BD7 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			children = (
 				96F9D12A2C090DBE005E3BD7 /* BookwormApp.swift */,
 				96F9D12C2C090DBE005E3BD7 /* ContentView.swift */,
+				96F9D13A2C0910C2005E3BD7 /* AddBookView.swift */,
+				96F9D1382C090FEE005E3BD7 /* Book.swift */,
 				96F9D12E2C090DC3005E3BD7 /* Assets.xcassets */,
 				96F9D1302C090DC3005E3BD7 /* Preview Content */,
 			);
@@ -139,6 +145,8 @@
 			files = (
 				96F9D12D2C090DBE005E3BD7 /* ContentView.swift in Sources */,
 				96F9D12B2C090DBE005E3BD7 /* BookwormApp.swift in Sources */,
+				96F9D1392C090FEE005E3BD7 /* Book.swift in Sources */,
+				96F9D13B2C0910C2005E3BD7 /* AddBookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
