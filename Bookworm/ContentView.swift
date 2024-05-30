@@ -19,7 +19,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     // To read all our books out
-    @Query var books: [Book] 
+    @Query var books: [Book]
     
     @State private var showingAddScreen = false
     

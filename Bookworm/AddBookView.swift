@@ -42,11 +42,9 @@ struct AddBookView: View {
                 Section("Write a review") {
                     TextEditor(text: $review)
                     
-                    Picker("Rating", selection: $rating) {
-                        ForEach(0..<6) {
-                            Text(String($0))
-                        }
-                    }
+                    // When SwiftUI has these rows in a Form, it likes to assume these rows are tappable (for example, the whole Save row can be tapped as a Button)
+                    // In this case, however, we have multiple Buttons in this row. SwiftUI is confused, it basically taps them all in order (add a print() inside RatingView to see it)
+                    RatingView(rating: $rating)
                 }
                 
                 Section {
