@@ -30,6 +30,8 @@ struct ContentView: View {
             // ForEach works out of the box (we don't need to set an id here) because all SwiftData Model objects conform to identifiable
             List {
                 ForEach(books) { book in // So we can add deleting later on
+                    // When the user taps a book here in ContentView, we're gonna present a new DetailView with more information (the genre, the brief review, and more.)
+                    // We will use reuse the RatingView in a customized way, as well as use artwork from unsplash.com
                     NavigationLink(value: book) {
                         HStack {
                             EmojiRatingView(rating: book.rating)
@@ -45,6 +47,9 @@ struct ContentView: View {
                         }
                     }
                 }
+            }
+            .navigationDestination(for: Book.self) { book in
+                DetailView(book: book)
             }
             .navigationTitle("Bookworm")
             .toolbar {
