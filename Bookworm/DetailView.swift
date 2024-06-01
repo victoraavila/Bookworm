@@ -12,6 +12,17 @@ struct DetailView: View {
     // This needs only one property: a Book to show
     let book: Book
     
+    // Adding a Delete Button that will delete this Book, pop out DetailView from the Navigation Stack, and then return to the original ContentView.
+    // We'll also trigger an alert to confirm if the user really wants to delete it. If so, we will delete it from the modelContext.
+    // We need 3 properties:
+    // 1. To hold the current modelContext and delete stuff from there.
+    // 2. To hold the dismiss action.
+    // 3. To control if we're currently showing the alert or not.
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
+    @State private var showingDeleteAlert = false
+    // We also need a method to delete the current book from modelContext and then dismiss the DetailView (doesn't matter if being shown with NavigationLink or .sheet(), dismiss() will work perfectly)
+    
     var body: some View {
         // Make sure your content is inside a ScrollView, so it ensures our full review fits onto the screen no matter how long it is
         ScrollView {
@@ -44,6 +55,31 @@ struct DetailView: View {
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
         .scrollBounceBehavior(.basedOnSize) // If the text fits completely, don't bounce
+        
+        // We want two Buttons in the alert: one to really delete the book and another one to cancel.
+        // Both of them gotta have specific Button roles attached to them so they look like iOS built-in looks
+        // Apple's guidance on labeling Alert texts: if it has titles like "I understand", then "OK" is good.
+        // However, if the user has to make a choice, then you MUST use verbs like "Ignore", "Reply" and "Confirm".
+        // In this case, we will use "Delete" and "Cancel":
+        .alert("Delete book", isPresented: $showingDeleteAlert) {
+            Button("Delete", role: .destructive, action: deleteBook)
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Are you sure?")
+        }
+        
+        // Adding a ToolbarItem that will flip the value of showingDeleteAlert
+        .toolbar {
+            Button("Delete this book", systemImage: "trash") {
+                showingDeleteAlert = true
+            }
+        }
+        
+    }
+    
+    func deleteBook() {
+        modelContext.delete(book)
+        dismiss()
     }
 }
 
