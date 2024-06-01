@@ -19,7 +19,32 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     // To read all our books out
-    @Query var books: [Book]
+//    @Query var books: [Book]
+    
+    // When you use @Query to pull data, you get to specify how you want that data to be sorted: alphabetically by one of the fields, numerically with the highest value, etc. It's important to choose some kind of sorting, because you want the user to have a predictable experience every time.
+    // We can also have more than one: sort by title first, then by rating.
+    // Sorting can be done in two ways:
+    // One is a simple option that allows only one sort field and the other is a more advanced that allows an array of type SortDescriptor
+    // Sorting on alphabetical order based on their title
+//    @Query(sort: \Book.title) var books: [Book]
+    
+    // Sorting based on rating, but with 5-star books first
+//    @Query(sort: \Book.rating, order: .reverse) var books: [Book]
+    
+    // However, it is better to have a back-up field to sort with in order to have a predictable behaviour
+    // This is done by using a SortDescriptor type which we can create from either one or two values: the field (property) to sort and the order
+    // Sorting on alphabetical order based on their title
+//    @Query(sort: [SortDescriptor(\Book.title)]) var books: [Book]
+    // Sorting on alphabetical order based on their title, and then reverse it (from Z-A)
+//    @Query(sort: [SortDescriptor(\Book.title, order: .reverse)]) var books: [Book]
+    
+    // Give me the Book title first, and when there are two books with same name sort by author
+    // Having two or three fields in this array to sort by it is a good idea, because it causes almost no impact! (Unless there are lots of data with multiple similar titles).
+    // If they have different titles, authors are never checked.
+    @Query(sort: [SortDescriptor(\Book.title),
+                  SortDescriptor(\Book.author)
+    ]) var books: [Book]
+    
     
     @State private var showingAddScreen = false
     
