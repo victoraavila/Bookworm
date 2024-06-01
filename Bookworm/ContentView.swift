@@ -72,12 +72,19 @@ struct ContentView: View {
                         }
                     }
                 }
+                // Turning the deletion from the Array into a deletion from the modelContext too
+                .onDelete(perform: deleteBooks)
             }
             .navigationDestination(for: Book.self) { book in
                 DetailView(book: book)
             }
             .navigationTitle("Bookworm")
             .toolbar {
+                // An Edit/Done Button (a visible Button which shows the option to delete books)
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add Book", systemImage: "plus") {
                         showingAddScreen.toggle()
@@ -87,6 +94,19 @@ struct ContentView: View {
             .sheet(isPresented: $showingAddScreen) {
                 AddBookView()
             }
+        }
+    }
+    
+    // Rather than just deleting items from the books array, we want to find the requested object in our query and then use it to call delete on our modelContext.
+    // When all objects are deleted, SwiftData auto-save will apply the changes permanently.
+    func deleteBooks(at offsets: IndexSet) {
+        // Go through all the things we've been asked to delete
+        for offset in offsets {
+            // Find this book in our current query
+            let book = books[offset]
+            
+            // Delete this book from the modelContext
+            modelContext.delete(book)
         }
     }
 }
