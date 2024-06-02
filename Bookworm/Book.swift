@@ -14,10 +14,22 @@ class Book {
     // We can also have more than one: sort by title first, then by rating.
     // Sorting can be done in two ways:
     // One is a simple option that allows only one sort field and the other is a more advanced that allows an array of type SortDescriptor
-    var title: String
-    var author: String
+    var title: String {
+        didSet {
+            title = title.trimmingCharacters(in: .whitespaces)
+        }
+    }
+    var author: String {
+        didSet {
+            author = author.trimmingCharacters(in: .whitespaces)
+        }
+    }
     var genre: String
-    var review: String
+    var review: String {
+        didSet {
+            review = review.trimmingCharacters(in: .whitespaces)
+        }
+    }
     var rating: Int
     var date: Date
     
@@ -31,8 +43,7 @@ class Book {
     }
     
     var hasValidMetadata: Bool {
-        return !title.trimmingCharacters(in: .whitespaces).isEmpty && !author.trimmingCharacters(in: .whitespaces).isEmpty &&
-               !(title.first?.isWhitespace ?? true) && !(author.first?.isWhitespace ?? true) &&
-               !(title.last?.isWhitespace ?? true) && !(author.last?.isWhitespace ?? true)
+        return !title.isEmpty && !author.isEmpty &&
+               !(title.first?.isWhitespace ?? true) && !(author.first?.isWhitespace ?? true)
     }
 }
