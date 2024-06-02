@@ -15,11 +15,7 @@ struct AddBookView: View {
     @Environment(\.dismiss) var dismiss
     
     // This form is going to store all the data required to make up a new book, so we need @State properties to save these local values
-    @State private var title = ""
-    @State private var author = ""
-    @State private var rating = 3 // Middling by default
-    @State private var genre = "Fantasy"
-    @State private var review = ""
+    @Bindable var book: Book = Book(title: "", author: "", genre: "Fantasy", review: "", rating: 3)
     
     // This will store all genre possible options, so we can make a Picker
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
@@ -28,10 +24,10 @@ struct AddBookView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Name of book", text: $title)
-                    TextField("Author's name", text: $author)
+                    TextField("Name of book", text: $book.title)
+                    TextField("Author's name", text: $book.author)
                     
-                    Picker("Genre", selection: $genre) {
+                    Picker("Genre", selection: $book.genre) {
                         ForEach(genres, id: \.self) {
                             Text($0)
                         }
@@ -40,24 +36,20 @@ struct AddBookView: View {
                 
                 // Since we're using a TextEditor for the review, we cannot add a placeholder. This is way we created a new Section (to use the title)
                 Section("Write a review") {
-                    TextEditor(text: $review)
+                    TextEditor(text: $book.review)
                     
                     // When SwiftUI has these rows in a Form, it likes to assume these rows are tappable (for example, the whole Save row can be tapped as a Button)
                     // In this case, however, we have multiple Buttons in this row. SwiftUI is confused, it basically taps them all in order (add a print() inside RatingView to see it)
-                    RatingView(rating: $rating)
+                    RatingView(rating: $book.rating)
                 }
                 
                 Section {
                     Button("Save") {
                         // Making an instance of our Book class using all the values from our form and inserting it into the modelContext, which triggers the auto-save
-                        let newBook = Book(title: title, author: author, genre: genre, review: review, rating: rating)
-                        modelContext.insert(newBook)
+                        modelContext.insert(book)
                         dismiss()
                     }
-                    .disabled(
-                        title.trimmingCharacters(in: .whitespaces).isEmpty || author.trimmingCharacters(in: .whitespaces).isEmpty ? 
-                        true : false
-                    )
+                    .disabled(!book.hasValidMetadata)
                 }
             }
             .navigationTitle("Add Book")
@@ -66,5 +58,5 @@ struct AddBookView: View {
 }
 
 #Preview {
-    AddBookView()
+    AddBookView(book: Book(title: "", author: "", genre: "Fantasy", review: "", rating: 3))
 }

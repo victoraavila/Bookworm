@@ -27,4 +27,10 @@ class Book {
         self.review = review
         self.rating = rating
     }
+    
+    var hasValidMetadata: Bool {
+        return !title.trimmingCharacters(in: .whitespaces).isEmpty && !author.trimmingCharacters(in: .whitespaces).isEmpty &&
+               !(title.first?.isWhitespace ?? true) && !(author.first?.isWhitespace ?? true) &&
+               !(title.last?.isWhitespace ?? true) && !(author.last?.isWhitespace ?? true)
+    }
 }
