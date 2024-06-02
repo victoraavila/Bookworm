@@ -15,7 +15,7 @@ struct AddBookView: View {
     @Environment(\.dismiss) var dismiss
     
     // This form is going to store all the data required to make up a new book, so we need @State properties to save these local values
-    @Bindable var book: Book = Book(title: "", author: "", genre: "Fantasy", review: "", rating: 3)
+    @Bindable var book: Book = Book(title: "", author: "", genre: "Fantasy", review: "", rating: 3, date: Date.now)
     
     // This will store all genre possible options, so we can make a Picker
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
@@ -58,5 +58,5 @@ struct AddBookView: View {
 }
 
 #Preview {
-    AddBookView(book: Book(title: "", author: "", genre: "Fantasy", review: "", rating: 3))
+    AddBookView(book: Book(title: "", author: "", genre: "Fantasy", review: "", rating: 3, date: Date.now))
 }

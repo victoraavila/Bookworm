@@ -51,6 +51,9 @@ struct DetailView: View {
             
             RatingView(rating: .constant(book.rating))
                 .font(.largeTitle)
+            
+            Text("(Added on \(book.date.formatted(date: .numeric, time: .omitted)), \(book.date.formatted(date: .omitted, time: .shortened)))")
+                .padding()
         }
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
@@ -94,7 +97,7 @@ struct DetailView: View {
         let container = try ModelContainer(for: Book.self, configurations: config)
         
         // This book silently finds the container and the context behind the scenes
-        let example = Book(title: "Test Book", author: "Test Author", genre: "Fantasy", review: "This was a great book; I really enjoyed it.", rating: 4)
+        let example = Book(title: "Test Book", author: "Test Author", genre: "Fantasy", review: "This was a great book; I really enjoyed it.", rating: 4, date: Date.now)
         
         return DetailView(book: example)
             .modelContainer(container)
