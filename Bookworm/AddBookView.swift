@@ -54,6 +54,10 @@ struct AddBookView: View {
                         modelContext.insert(newBook)
                         dismiss()
                     }
+                    .disabled(
+                        title.trimmingCharacters(in: .whitespaces).isEmpty || author.trimmingCharacters(in: .whitespaces).isEmpty ? 
+                        true : false
+                    )
                 }
             }
             .navigationTitle("Add Book")
