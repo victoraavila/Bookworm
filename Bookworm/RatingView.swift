@@ -45,13 +45,31 @@ struct RatingView: View {
                 }
                 // 1st way:
                 // Adding two modifiers: the 1st is a meaningful label for each star and the 2nd is an extra trait to the Buttons that are currently highlighted (so users can see which one is currently active)
-                .accessibilityLabel("\(number == 1 ? "1 star" : "\(number) stars")")
-                .accessibilityAddTraits(number > rating ? [] : [.isSelected]) // If rating is 3 and number is 4, add no traits. If not, it will say "one star, selected"...
+//                .accessibilityLabel("\(number == 1 ? "1 star" : "\(number) stars")")
+//                .accessibilityAddTraits(number > rating ? [] : [.isSelected]) // If rating is 3 and number is 4, add no traits. If not, it will say "one star, selected"...
             }
         }
         // Add this so the whole row won't be equivalent to a single Button in a Form
         // (even Seniors don't know this hack)
         .buttonStyle(.plain)
+        
+        // 2nd way: the adjustable action approach by swapping, which is more confortable to VoiceOver users than tapping the stars
+        // Applying to the whole RatingView
+        .accessibilityElement() // Grouping all five buttons
+        .accessibilityLabel(label) // Label is being passed in already
+        .accessibilityValue(rating == 1 ? "1 star" : "\(rating) stars") // This will be read as rating: 2 stars, since the label is "rating".
+        // Controlling increasing and decreasing the value with swipe gestures
+        .accessibilityAdjustableAction { direction in
+            switch direction {
+            case .increment:
+                if rating < maximumRating { rating += 1 }
+            case .decrement:
+                if rating > 1 { rating -= 1 }
+            default:
+                // It probably won't enter here
+                break
+            }
+        }
     }
     
     // The logic to select the Images is this: if the rating passed in is greater than the current rating, return the offImage if it was set. Otherwise, return the onImage.
