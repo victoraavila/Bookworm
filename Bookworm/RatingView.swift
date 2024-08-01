@@ -11,6 +11,13 @@ import SwiftUI
 // We will build a star rating component with a bunch of extra customizable properties for flexibility: a label for it, an integer value for the maximum number of stars, off/on Images (the default will be nil for the off Image and a filled star for the on Image), off/on colors (if the star is highlighted it will be yellow, otherwise it will be gray).
 // We will also have a @Binding to an Integer made elsewhere that will be changed when the user taps the stars.
 
+// VoiceOver/Accessibility notes
+// This RatingView does not work well with VoiceOver: since it uses a lot of Buttons, each star is treated individually (all each one says is "favorite, button").
+// This is extra problematic because RatingView was designed to be reusable: you can take it to other projects. Since this accessibility issue is not being corrected, you will pollute the other projects.
+// We'll tackle it in two ways:
+// 1. Using a lot of modifiers to do an OK job;
+// 2. Looking at how adjustable actions get us a more optimal solution.
+
 struct RatingView: View {
     @Binding var rating: Int
     
@@ -36,6 +43,10 @@ struct RatingView: View {
                     image(for: number)
                         .foregroundStyle(number > rating ? offColor : onColor)
                 }
+                // 1st way:
+                // Adding two modifiers: the 1st is a meaningful label for each star and the 2nd is an extra trait to the Buttons that are currently highlighted (so users can see which one is currently active)
+                .accessibilityLabel("\(number == 1 ? "1 star" : "\(number) stars")")
+                .accessibilityAddTraits(number > rating ? [] : [.isSelected]) // If rating is 3 and number is 4, add no traits. If not, it will say "one star, selected"...
             }
         }
         // Add this so the whole row won't be equivalent to a single Button in a Form
